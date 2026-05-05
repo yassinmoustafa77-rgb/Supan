@@ -46,8 +46,27 @@ faders.forEach(fader => {
     appearOnScroll.observe(fader);
 });
 
-// --- Music Player Toggle ---
-// Replaced by Spotify Embed. Logic no longer needed.
+// --- Spotify Playlist Logic ---
+const songs = [
+    "https://open.spotify.com/embed/track/2GThBgzZoZfz0lx1JjBwfe?utm_source=generator&theme=0",
+    "https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?utm_source=generator"
+];
+let currentSongIndex = 0;
+const spotifyPlayer = document.getElementById('spotify-player');
+const prevBtn = document.getElementById('prev-song');
+const nextBtn = document.getElementById('next-song');
+
+if (spotifyPlayer && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        spotifyPlayer.src = songs[currentSongIndex];
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        spotifyPlayer.src = songs[currentSongIndex];
+    });
+}
 
 // --- Envelope Logic ---
 const envelope = document.getElementById('envelope');
