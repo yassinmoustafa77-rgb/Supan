@@ -236,3 +236,32 @@ checkboxes.forEach((checkbox) => {
         localStorage.setItem(checkbox.id, checkbox.checked);
     });
 });
+
+// --- Image Lightbox Logic ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeLightbox = document.querySelector('.lightbox-close');
+const galleryItems = document.querySelectorAll('.gallery-item img');
+
+if (lightbox && lightboxImg && closeLightbox && galleryItems) {
+    galleryItems.forEach(img => {
+        // Add pointer-like visual to images so they know it's clickable
+        // Since we use custom cursor, maybe just a hover effect
+        img.style.cursor = 'none'; 
+        img.addEventListener('click', () => {
+            lightbox.style.display = 'block';
+            lightboxImg.src = img.src;
+        });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+    });
+
+    // Close when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+}
