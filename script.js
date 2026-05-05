@@ -237,31 +237,42 @@ checkboxes.forEach((checkbox) => {
     });
 });
 
-// --- Image Lightbox Logic ---
+// --- Lightbox Logic ---
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
+const lightboxVid = document.getElementById('lightbox-vid');
 const closeLightbox = document.querySelector('.lightbox-close');
-const galleryItems = document.querySelectorAll('.gallery-item img');
+const galleryMedia = document.querySelectorAll('.gallery-item img, .gallery-item video');
 
-if (lightbox && lightboxImg && closeLightbox && galleryItems) {
-    galleryItems.forEach(img => {
-        // Add pointer-like visual to images so they know it's clickable
-        // Since we use custom cursor, maybe just a hover effect
-        img.style.cursor = 'none'; 
-        img.addEventListener('click', () => {
+if (lightbox && lightboxImg && lightboxVid && closeLightbox && galleryMedia) {
+    galleryMedia.forEach(media => {
+        media.style.cursor = 'none'; 
+        media.addEventListener('click', () => {
             lightbox.style.display = 'block';
-            lightboxImg.src = img.src;
+            if (media.tagName.toLowerCase() === 'img') {
+                lightboxImg.src = media.src;
+                lightboxImg.style.display = 'block';
+                lightboxVid.style.display = 'none';
+                lightboxVid.pause();
+            } else if (media.tagName.toLowerCase() === 'video') {
+                lightboxVid.src = media.src;
+                lightboxVid.style.display = 'block';
+                lightboxImg.style.display = 'none';
+                lightboxVid.play();
+            }
         });
     });
 
     closeLightbox.addEventListener('click', () => {
         lightbox.style.display = 'none';
+        lightboxVid.pause();
     });
 
-    // Close when clicking outside the image
+    // Close when clicking outside the media
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.style.display = 'none';
+            lightboxVid.pause();
         }
     });
 }
