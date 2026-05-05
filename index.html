@@ -38,7 +38,11 @@
 
     <!-- Floating Music Player (Spotify) -->
     <div id="music-player" class="fade-in-up" style="animation-delay: 1s;">
-        <iframe style="border-radius:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);" src="https://open.spotify.com/embed/track/2GThBgzZoZfz0lx1JjBwfe?utm_source=generator&theme=0" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="music-controls">
+            <button id="prev-song" class="music-btn" title="Previous Song"><i class="fas fa-step-backward"></i></button>
+            <button id="next-song" class="music-btn" title="Next Song"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <iframe id="spotify-player" style="border-radius:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);" src="https://open.spotify.com/embed/track/2GThBgzZoZfz0lx1JjBwfe?utm_source=generator&theme=0" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <!-- Hero Section -->
