@@ -276,3 +276,110 @@ if (lightbox && lightboxImg && lightboxVid && closeLightbox && galleryMedia) {
         }
     });
 }
+
+// --- Daily Love Generator ---
+const loveReasons = [
+    "You have the most beautiful smile.",
+    "Your laugh is my favorite sound in the world.",
+    "You always know how to make me feel better.",
+    "You have a heart of gold.",
+    "Your eyes hold the whole universe.",
+    "You are incredibly smart and driven.",
+    "I love the way you look at me.",
+    "Every moment with you feels like magic.",
+    "You are my safe space.",
+    "I love your silly jokes.",
+    "You make my world so much brighter.",
+    "I love the way we understand each other.",
+    "You inspire me to be a better person.",
+    "My heart still skips a beat when I see you."
+];
+
+const generateBtn = document.getElementById('generate-btn');
+const loveReasonText = document.getElementById('love-reason-text');
+
+if (generateBtn && loveReasonText) {
+    generateBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * loveReasons.length);
+        
+        // Add a small fade-out effect
+        loveReasonText.style.opacity = 0;
+        
+        setTimeout(() => {
+            loveReasonText.innerText = loveReasons[randomIndex];
+            loveReasonText.style.opacity = 1;
+            loveReasonText.style.transition = "opacity 0.5s ease";
+        }, 300);
+    });
+}
+
+// --- Love Coupons ---
+const redeemBtns = document.querySelectorAll('.redeem-btn');
+
+redeemBtns.forEach((btn) => {
+    const couponCard = btn.closest('.coupon');
+    
+    btn.addEventListener('click', () => {
+        couponCard.classList.add('redeemed');
+    });
+});
+
+// --- Scratch-Off Logic ---
+const scratchCanvas = document.getElementById('scratch-canvas');
+if (scratchCanvas) {
+    const sCtx = scratchCanvas.getContext('2d');
+    let isDrawing = false;
+    
+    // Set canvas size to match container
+    const setCanvasSize = () => {
+        const rect = scratchCanvas.parentElement.getBoundingClientRect();
+        // Fallback dimensions if rect is 0
+        scratchCanvas.width = rect.width || 400;
+        scratchCanvas.height = rect.height || 250;
+        
+        // Fill with a color/pattern initially
+        sCtx.fillStyle = '#2a2a35'; // Slightly lighter than background
+        sCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+        
+        // Add some text over the scratch layer
+        sCtx.fillStyle = '#ff4d6d';
+        sCtx.font = '24px Playfair Display';
+        sCtx.textAlign = 'center';
+        sCtx.fillText('Scratch Here', scratchCanvas.width / 2, scratchCanvas.height / 2);
+    };
+    
+    // Initialize after a small delay to ensure CSS is applied
+    setTimeout(setCanvasSize, 100);
+
+    const getMousePos = (canvas, evt) => {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: (evt.clientX || (evt.touches && evt.touches[0].clientX)) - rect.left,
+            y: (evt.clientY || (evt.touches && evt.touches[0].clientY)) - rect.top
+        };
+    };
+
+    const scratch = (e) => {
+        if (!isDrawing) return;
+        e.preventDefault();
+        
+        const pos = getMousePos(scratchCanvas, e);
+        
+        sCtx.globalCompositeOperation = 'destination-out';
+        sCtx.beginPath();
+        sCtx.arc(pos.x, pos.y, 30, 0, Math.PI * 2, false);
+        sCtx.fill();
+    };
+
+    scratchCanvas.addEventListener('mousedown', () => isDrawing = true);
+    scratchCanvas.addEventListener('mousemove', scratch);
+    window.addEventListener('mouseup', () => isDrawing = false);
+
+    // Touch support
+    scratchCanvas.addEventListener('touchstart', (e) => {
+        isDrawing = true;
+        scratch(e);
+    });
+    scratchCanvas.addEventListener('touchmove', scratch);
+    window.addEventListener('touchend', () => isDrawing = false);
+}
