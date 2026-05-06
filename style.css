@@ -914,6 +914,280 @@ footer {
     /* Optional: style when checked */
 }
 
+/* --- Daily Love Generator --- */
+.generator-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.generator-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+#love-reason-text {
+    font-size: 1.5rem;
+    font-family: var(--font-cursive);
+    color: var(--accent-light);
+    margin-bottom: 30px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Love Coupons --- */
+.coupons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.coupon {
+    background: linear-gradient(135deg, rgba(255, 77, 109, 0.1), rgba(0,0,0,0.5));
+    border: 2px dashed var(--accent);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.coupon:hover {
+    transform: translateY(-5px);
+}
+.coupon-content h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+.coupon-content p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    filter: blur(6px);
+    transition: filter 0.3s ease;
+}
+.coupon.redeemed .coupon-content p {
+    filter: blur(0);
+}
+.redeem-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: none;
+    transition: background 0.3s;
+}
+.redeem-btn:hover {
+    background: var(--accent-light);
+}
+.stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg) scale(2);
+    color: #e74c3c;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 4px solid #e74c3c;
+    padding: 10px;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.coupon.redeemed .stamp {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1);
+}
+.coupon.redeemed .redeem-btn {
+    display: none;
+}
+.coupon.redeemed {
+    opacity: 0.6;
+    border-color: #555;
+}
+
+/* --- Promises Section --- */
+.promises-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.promise-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.promise-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px var(--accent-glow);
+    border-color: var(--accent);
+}
+.promise-icon {
+    min-width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+.promise-item p {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    font-family: var(--font-cursive);
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+/* --- Future Map (Polaroids) --- */
+.future-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.polaroid {
+    background: #fff;
+    padding: 15px 15px 40px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    width: 250px;
+    transform: rotate(-5deg);
+    transition: transform 0.3s;
+}
+.polaroid:nth-child(even) {
+    transform: rotate(5deg);
+}
+.polaroid:hover {
+    transform: scale(1.1) rotate(0deg);
+    z-index: 10;
+}
+.polaroid-img {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+.polaroid-caption {
+    color: #333;
+    font-family: var(--font-cursive);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* --- Scratch-Off Surprise --- */
+.scratch-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.scratch-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--bg-alt));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 1;
+}
+.scratch-content h3 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+.scratch-content p {
+    color: rgba(255,255,255,0.9);
+}
+#scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: none;
+}
+
+/* --- Voice Message --- */
+.vm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.vm-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.vm-card i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+.vm-card h3 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+.vm-card audio {
+    width: 100%;
+    outline: none;
+}
+.vm-card audio::-webkit-media-controls-panel {
+    background-color: var(--bg-alt);
+    color: var(--text-primary);
+}
+.vm-card audio::-webkit-media-controls-play-button,
+.vm-card audio::-webkit-media-controls-mute-button {
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+.vm-card audio::-webkit-media-controls-current-time-display,
+.vm-card audio::-webkit-media-controls-time-remaining-display {
+    color: var(--text-primary);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-links {
