@@ -1557,6 +1557,12 @@ body.night-light-active .section-title {
     background: radial-gradient(circle at center, #0d0d2b 0%, #050510 70%, #000 100%);
     overflow: hidden;
     perspective: 1500px;
+    text-align: center;
+}
+
+.galaxy-section .section-title {
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .galaxy-container {
@@ -1666,6 +1672,7 @@ body.night-light-active .section-title {
 }
 
 @media (max-width: 768px) {
-    .galaxy-container { transform: scale(0.6); }
-    .galaxy-section { height: 60vh; }
+    .galaxy-container { transform: scale(0.45); }
+    .galaxy-section { height: 70vh; }
+    .planet-label { font-size: 0.8rem; padding: 2px 8px; }
 }
